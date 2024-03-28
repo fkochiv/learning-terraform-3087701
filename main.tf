@@ -90,8 +90,8 @@ module "alb" {
     }
   }
 
-  target_groups = {
-    ex-instance = {
+  target_groups = [
+    {
       name_prefix      = "blog"
       protocol         = "HTTP"
       port             = 80
@@ -101,7 +101,7 @@ module "alb" {
         port           = 80
       }
     }
-  }
+  ]
 
   tags = {
     Environment = "dev"
