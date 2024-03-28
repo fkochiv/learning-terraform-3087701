@@ -14,9 +14,11 @@ data "aws_ami" "app_ami" {
   owners = ["979382823631"] # Bitnami
 }
 
+/*
 data "aws_vpc" "default" {
   default = true
 }
+*/
 
 module "blog_vpc" {
   source = "terraform-aws-modules/vpc/aws"
@@ -60,13 +62,13 @@ module "alb" {
 
   vpc_id              = module.blog_vpc.vpc_id
   subnets             = module.blog_vpc.public_subnets
-  security_groups = [module.blog_sg.security_group_id]
+  security_groups     = [module.blog_sg.security_group_id]
 
   target_groups = [
     {
       name_prefix      = "blog"
-      backend_protocol         = "HTTP"
-      backend_port             = 80
+      backend_protocol = "HTTP"
+      backend_port     = 80
       target_type      = "instance"
       targets = {
         target_id      = aws_instance.blog.id
@@ -101,6 +103,7 @@ module "blog_sg" {
   egress_cidr_blocks  = ["0.0.0.0/0"]
 }
 
+/*
 resource "aws_security_group" "blog" {
   name        = "blog"
   description = "Allow http and https in. Allow everything out."
@@ -137,3 +140,4 @@ resource "aws_security_group_rule" "blog_everything_out" {
 
   security_group_id = aws_security_group.blog.id
 }
+*/
