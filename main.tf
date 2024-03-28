@@ -62,7 +62,7 @@ module "alb" {
     {
       port               = 80
       protocol           = "HTTP"
-      target_group_indez = 0
+      target_group_index = 0
     }
   ]
 
